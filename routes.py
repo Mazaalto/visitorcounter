@@ -1,6 +1,7 @@
 from app import app
 import visits
-from flask import render_template
+from flask import render_template, request, redirect
+import messages, users
 
 @app.route("/")
 def index():
@@ -9,7 +10,11 @@ def index():
     list = messages.get_list()
     return render_template("index.html", counter=counter, count=len(list), messages=list)
 
-@app.route("/send", methods=["POST"])
+@app.route("/new")
+def new():
+    return render_template("new.html")
+
+@app.route("/send", methods=["post"])
 def send():
     content = request.form["content"]
     if messages.send(content):
@@ -28,6 +33,10 @@ def login():
             return redirect("/")
         else:
             return render_template("error.html",message="Väärä tunnus tai salasana")
+@app.route("/logout")
+def logout():
+    users.logout()
+    return redirect("/")
 
 # uuden käyttäjän rekisteröiminen sovellukseen
 @app.route("/register", methods=["GET","POST"])
