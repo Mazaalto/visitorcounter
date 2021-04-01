@@ -1,7 +1,7 @@
 from app import app
-import visits
 from flask import render_template, request, redirect
-import messages, users
+import visits, messages, users
+
 
 @app.route("/")
 def index():
