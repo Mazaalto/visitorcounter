@@ -8,7 +8,7 @@ def index():
     visits.add_visit()
     counter = visits.get_counter()
     list = messages.get_list()
-    return render_template("index.html", counter=counter, count=len(list), messages=list)
+    return render_template("index.html", count=len(list), messages=list)
 
 @app.route("/new")
 def new():
